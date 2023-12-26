@@ -13,6 +13,9 @@ import { Formik, Form } from "formik";
 import { UpdatePasswordSchema } from "../schema";
 import toast from "react-hot-toast";
 import { Icon } from "@iconify/react";
+import { SHA256 } from 'crypto-js';
+import { useNavigate } from "react-router-dom";
+
 const initialValues = {
   currentPassword: "",
   newPassword: "",
@@ -27,7 +30,7 @@ const ChangePassword = () => {
   const [showCurr, setShowCurr] = useState(false);
   const [showNew, setShowNew] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-
+  const navigate = useNavigate();
   const handleShowCurr = (e) => {
     e.preventDefault();
     setShowCurr((pre) => !pre);
@@ -41,22 +44,23 @@ const ChangePassword = () => {
     setShowConfirm((pre) => !pre);
   };
   const onSubmit = (values, { resetForm }) => {
-    const allUsers = JSON.parse(localStorage.getItem("dataKey"));
-    const loggedInUser = allUsers?.find(
-      (user) => user.email === userName.email
-    );
-    const userPassword = loggedInUser["password"];
-    if (userPassword === values.currentPassword) {
+    const allUsers = JSON.parse(localStorage.getItem('dataKey'));
+    const loggedInUser = allUsers?.find((user) => user.email === userName.email);
+
+    // Hash the current password for comparison
+    const hashedCurrentPassword = SHA256(values.currentPassword).toString();
+
+    if (loggedInUser && loggedInUser.password === hashedCurrentPassword) {
       // Update the password in local storage for the "userData" key
+      loggedInUser.password = SHA256(values.newPassword).toString();
+      localStorage.setItem('userData', JSON.stringify(loggedInUser));
+      localStorage.setItem('dataKey', JSON.stringify(allUsers));
 
-      (loggedInUser.password = values.newPassword),
-        localStorage.setItem("userData", JSON.stringify(loggedInUser));
-      localStorage.setItem("dataKey", JSON.stringify(allUsers));
-
-      toast.success("Password updated successfully!");
+      toast.success('Password updated successfully!');
+      navigate("/login")
       resetForm();
     } else {
-      toast.error("Current password is incorrect");
+      toast.error('Current password is incorrect');
     }
   };
 

@@ -617,12 +617,35 @@ footer {
 
         .product-image {
             @include displayPosition(center, center, row);
+            .slick-slider {
+                width: 100%;
+                max-width: 880px;
+                .slick-list{
+                    .slick-track{
+                        margin: 0 auto;
+                        .slick-slide{
+                           display: flex;
+                           justify-content: center;
+                           img {
+                            width: 100%;
+                            max-width: 400px;
+                            height: 300px;
+                            object-fit: contain;
+                            aspect-ratio: 4/3;
+                        }
+                        }
+                    }
+                }
+                .slick-dots{
+                    margin-bottom: 20px;
+                }
+            }
 
             img {
                 width: 100%;
-                max-width: 400px;
+                max-width: 415px;
                 height: 300px;
-                object-fit: contain;
+                object-fit: cover;
                 aspect-ratio: 4/3;
             }
         }
@@ -740,3 +763,15 @@ footer {
     }
 
 }
+
+//match-height
+.match-height {
+    > [class*='col'] {
+      display: flex;
+      flex-flow: column;
+  
+      > .product-detail {
+        flex: 1 1 auto;
+      }
+    }
+  }

@@ -14,6 +14,7 @@ import { RegisterSchema } from "../schema";
 import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
+import { SHA256 } from "crypto-js";
 const initialValues = {
   fname: "",
   lname: "",
@@ -36,15 +37,27 @@ const SignUp = () => {
   };
   const navigate = useNavigate();
   const onSubmit = (values) => {
+    // Encrypt passwords using SHA256
+    const encryptedPassword = SHA256(values.password).toString();
+    const encryptedConfirmPassword = SHA256(values.cpassword).toString();
+
     setData([...data, values]);
-    let arr = [...data, values];
+    let arr = [
+      ...data,
+      {
+        ...values,
+        password: encryptedPassword,
+        cpassword: encryptedConfirmPassword,
+      },
+    ];
     const newArr = JSON.parse(localStorage.getItem("dataKey")) || [];
     const filterArr = newArr.find((e) => values.email === e.email);
+
     if (filterArr) {
-      toast.error("email id alredy exist");
+      toast.error("Email id already exists");
     } else {
       localStorage.setItem("dataKey", JSON.stringify(arr));
-      toast.success("register successfully");
+      toast.success("Registered successfully");
       navigate("/login");
     }
   };
@@ -151,7 +164,9 @@ const SignUp = () => {
                             onClick={(e) => handleShowPass(e)}
                             tag="button"
                           >
-                            <Icon icon={showPass ? "mdi:eye" : "el:eye-close"} />
+                            <Icon
+                              icon={showPass ? "mdi:eye" : "el:eye-close"}
+                            />
                           </InputGroupText>
                         </InputGroup>
                         {errors.password && touched.password ? (
@@ -164,7 +179,7 @@ const SignUp = () => {
                         <Label>Confirm Password</Label>
                         <InputGroup>
                           <Input
-                            type={showConfirmPass ?  "text" : "password"}
+                            type={showConfirmPass ? "text" : "password"}
                             placeholder="Enter your confirm password"
                             id="cpassword"
                             name="cpassword"
@@ -176,7 +191,11 @@ const SignUp = () => {
                             onClick={(e) => handleShowConFirmPass(e)}
                             tag="button"
                           >
-                            <Icon icon={showConfirmPass ? "mdi:eye" : "el:eye-close"} />
+                            <Icon
+                              icon={
+                                showConfirmPass ? "mdi:eye" : "el:eye-close"
+                              }
+                            />
                           </InputGroupText>
                         </InputGroup>
 

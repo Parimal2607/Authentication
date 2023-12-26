@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Loader from "../common/Loader";
-
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 const ProductDetail = () => {
   const { id } = useParams();
   const url = "https://dummyjson.com/products";
@@ -21,7 +23,24 @@ const ProductDetail = () => {
   }, []);
 
   const product = data.find((e) => e.id == id);
-
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 2,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true
+        }
+      },
+    ]
+  };
   // if (!product) {
   //   // Handle the case where the product is not found
   //   return (
@@ -44,11 +63,43 @@ const ProductDetail = () => {
 
             <div className="product">
               <div className="product-image">
-                <img
-                  src={product.thumbnail}
-                  alt={product.title}
-                  className="img-fluid"
-                />
+                <Slider {...settings}>
+                  <div>
+                    <img
+                      src={product.images[0]}
+                      alt={product.title}
+                      className="img-fluid"
+                    />
+                  </div>
+                  <div>
+                    <img
+                      src={product.images[1]}
+                      alt={product.title}
+                      className="img-fluid"
+                    />
+                  </div>
+                  <div>
+                    <img
+                      src={product.images[2]}
+                      alt={product.title}
+                      className="img-fluid"
+                    />
+                  </div>
+                  <div>
+                    <img
+                      src={product.images[3]}
+                      alt={product.title}
+                      className="img-fluid"
+                    />
+                  </div>
+                  <div>
+                    <img
+                      src={product.images[4]}
+                      alt={product.title}
+                      className="img-fluid"
+                    />
+                  </div>
+                </Slider>
               </div>
               <div className="product-details">
                 <div className="product-category ">

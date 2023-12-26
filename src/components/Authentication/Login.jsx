@@ -13,6 +13,7 @@ import toast from "react-hot-toast";
 import { Formik, Form } from "formik";
 import { LoginSchema } from "../schema";
 import { Icon } from "@iconify/react";
+import { SHA256 } from "crypto-js";
 const initialValues = {
   loginEmail: "",
   loginPassword: "",
@@ -32,17 +33,17 @@ const Login = () => {
   const onSubmit = (values) => {
     const newArr = userName?.find(
       (e) =>
-        values.loginEmail === e.email && values.loginPassword === e.password
+        values.loginEmail === e.email &&
+        SHA256(values.loginPassword).toString() === e.password
     );
+
     if (newArr) {
-      console.log("jabhsvhagsfhjags");
       localStorage.setItem("userData", JSON.stringify(newArr));
       toast.success("You have successfully logged in.");
       navigate("/dashboard");
     } else {
-      toast.error("invalid email or password");
+      toast.error("Invalid email or password");
     }
-    console.log(newArr);
   };
 
   return (
