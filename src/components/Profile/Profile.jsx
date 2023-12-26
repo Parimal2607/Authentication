@@ -5,6 +5,11 @@ import { Formik, Form } from "formik";
 import { RegisterSchema, UpdateProfileSchema } from "../schema";
 import toast from "react-hot-toast";
 
+/**
+ * Renders the user profile page.
+ *
+ * @return {JSX.Element} The user profile page component.
+ */
 const Profile = () => {
   const [userName, setUserName] = useState(() => {
     const savedItem = localStorage.getItem("userData");
@@ -17,6 +22,11 @@ const Profile = () => {
     email: userName.email,
     mobile: userName.mobile,
   };
+  /**
+   * Submits the form with the provided values and updates the user information.
+   *
+   * @param {object} values - The values from the form submission.
+   */
   const onSubmit = (values) => {
     console.log("values");
     const allUsers = JSON.parse(localStorage.getItem("dataKey"));

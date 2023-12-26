@@ -16,6 +16,11 @@ import Profile from "../components/Profile/Profile";
 import ProductDetail from "../components/ProductListing/ProductDetail";
 import Home from "../components/common/Home";
 import Product from "../components/ProductListing/Product"
+/**
+ * Renders the main application router component.
+ *
+ * @return {JSX.Element} The rendered router component.
+ */
 const AppRouter = () => {
     return (
         <Router>

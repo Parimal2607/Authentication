@@ -7,6 +7,11 @@ import {
   FaLinkedinIn,
 } from "react-icons/fa";
 
+/**
+ * Renders the footer component.
+ *
+ * @return {JSX.Element} The rendered footer component.
+ */
 function Footer() {
   let authenticated;
   const Username = localStorage.getItem("userData");

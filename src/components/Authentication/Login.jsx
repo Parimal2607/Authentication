@@ -18,6 +18,14 @@ const initialValues = {
   loginEmail: "",
   loginPassword: "",
 };
+/**
+ * Logs in a user with the provided email and password.
+ *
+ * @param {object} values - The login form values.
+ * @param {string} values.loginEmail - The email entered by the user.
+ * @param {string} values.loginPassword - The password entered by the user.
+ * @return {void}
+ */
 const Login = () => {
   const [userName, setUserName] = useState(() => {
     const savedItem = localStorage.getItem("dataKey");
@@ -25,6 +33,12 @@ const Login = () => {
     return parsedItem || "";
   });
   const [show, setShow] = useState(false);
+  /**
+   * Toggles the visibility of an element.
+   *
+   * @param {Event} e - The event object.
+   * @return {void}
+   */
   const handleShow = (e) => {
     e.preventDefault();
     setShow((pre) => !pre);

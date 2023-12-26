@@ -21,6 +21,11 @@ const initialValues = {
   newPassword: "",
   confirmNewPassword: "",
 };
+/**
+ * Renders the ChangePassword component.
+ *
+ * @return {ReactNode} The rendered ChangePassword component.
+ */
 const ChangePassword = () => {
   const [userName, setUserName] = useState(() => {
     const savedItem = localStorage.getItem("userData");
@@ -31,18 +36,43 @@ const ChangePassword = () => {
   const [showNew, setShowNew] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const navigate = useNavigate();
+/**
+ * A function that handles the event for showing the current value.
+ *
+ * @param {Event} e - The event object.
+ * @return {boolean} The updated value of showCurr.
+ */
   const handleShowCurr = (e) => {
     e.preventDefault();
     setShowCurr((pre) => !pre);
   };
+/**
+ * Handles the event when the "Show New" button is clicked.
+ *
+ * @param {Event} e - The click event object.
+ * @return {void} This function does not return a value.
+ */
   const handleShowNew = (e) => {
     e.preventDefault();
     setShowNew((pre) => !pre);
   };
+  /**
+   * Handles the event when the confirm button is shown.
+   *
+   * @param {Object} e - The event object.
+   * @return {void} 
+   */
   const handleShowConfirm = (e) => {
     e.preventDefault();
     setShowConfirm((pre) => !pre);
   };
+  /**
+   * Submits the form with the given values and updates the password for the logged-in user.
+   *
+   * @param {object} values - The form values.
+   * @param {object} resetForm - A function to reset the form.
+   * @return {undefined} - There is no return value.
+   */
   const onSubmit = (values, { resetForm }) => {
     const allUsers = JSON.parse(localStorage.getItem('dataKey'));
     const loggedInUser = allUsers?.find((user) => user.email === userName.email);

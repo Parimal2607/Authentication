@@ -4,11 +4,21 @@ import Loader from "../common/Loader";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+/**
+ * Renders the product detail page.
+ *
+ * @return {JSX.Element} The JSX element representing the product detail page.
+ */
 const ProductDetail = () => {
   const { id } = useParams();
   const url = "https://dummyjson.com/products";
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  /**
+   * Fetches information from the specified URL and updates the data and loading state.
+   *
+   * @return {Promise} A Promise that resolves when the data is fetched and the state is updated.
+   */
   const fetchInfo = () => {
     return fetch(url)
       .then((res) => res.json())
@@ -41,14 +51,7 @@ const ProductDetail = () => {
       },
     ]
   };
-  // if (!product) {
-  //   // Handle the case where the product is not found
-  //   return (
-  //     <div className="container mt-3">
-  //       <p>Product not found</p>
-  //     </div>
-  //   );
-  // }
+ 
 
   return (
     <>

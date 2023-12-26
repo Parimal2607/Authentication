@@ -3,6 +3,11 @@ import { Col, Row } from "reactstrap";
 import { GlobalInfo } from "./Product";
 import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
+/**
+ * Renders a product listing component.
+ *
+ * @return {JSX.Element} The JSX element representing the product listing.
+ */
 const ProductListing = () => {
   const { data } = useContext(GlobalInfo);
   const [currentPage, setCurrentPage] = useState(0);
@@ -10,6 +15,12 @@ const ProductListing = () => {
 
   const pageCount = Math.ceil(data.length / productsPerPage);
 
+/**
+ * Handles the page change event.
+ *
+ * @param {Object} selected - The selected page object.
+ * @return {undefined} There is no return value.
+ */
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });

@@ -15,9 +15,19 @@ import { Link, useNavigate } from "react-router-dom";
 import { IoClose } from "react-icons/io5";
 
 
+/**
+ * Renders the Dashboard component.
+ *
+ * @return {JSX.Element} The rendered Dashboard component.
+ */
 export const Dashboard = () => {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   let navigate = useNavigate();
+  /**
+   * Function to log out the user.
+   *
+   * @return {undefined} No return value.
+   */
   const logOut = () => {
     localStorage.removeItem("userData");
     navigate("/login");

@@ -23,6 +23,11 @@ const initialValues = {
   password: "",
   cpassword: "",
 };
+/**
+ * Handles the sign-up functionality.
+ *
+ * @return {void} - This function does not return a value.
+ */
 const SignUp = () => {
   const [data, setData] = useState([]);
   const [showPass, setShowPass] = useState(false);
@@ -31,11 +36,23 @@ const SignUp = () => {
     e.preventDefault();
     setShowPass((pre) => !pre);
   };
+  /**
+   * Handles the action of showing or hiding the confirm password field.
+   *
+   * @param {Object} e - The event object.
+   * @return {void} - This function does not return a value.
+   */
   const handleShowConFirmPass = (e) => {
     e.preventDefault();
     setShowConfirmPass((pre) => !pre);
   };
   const navigate = useNavigate();
+  /**
+   * Submit the form data.
+   *
+   * @param {Object} values - The form values.
+   * @return {void} No return value.
+   */
   const onSubmit = (values) => {
     // Encrypt passwords using SHA256
     const encryptedPassword = SHA256(values.password).toString();

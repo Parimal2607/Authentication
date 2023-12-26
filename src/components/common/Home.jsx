@@ -2,15 +2,18 @@ import React, { useEffect } from "react";
 import { Container } from "reactstrap";
 import { toast } from "react-hot-toast";
 
+/**
+ * Renders the Home component.
+ *
+ * @return {React.Element} The rendered Home component.
+ */
 function Home() {
   let authenticated;
   const Username = localStorage.getItem("userData");
   if (Username) {
     authenticated = JSON.parse(Username);
   }
-  // useEffect(() => {
-  //   toast.success(`Welcome ${authenticated.fname} ${authenticated.lname}`);
-  // }, [authenticated.fname, authenticated.lname]);
+
   return (
     <>
      
