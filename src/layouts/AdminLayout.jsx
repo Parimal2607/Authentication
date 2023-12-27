@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Header from "../components/common/Dashboard";
-import Footer from "../components/common/Footer";
+import Header from "./Header";
+import Footer from "./Footer";
 
 const AdminLayout = ({ children }) => {
 

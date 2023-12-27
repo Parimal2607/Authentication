@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import AdminLayout from "../layouts/AdminLayout";
 import FullLayout from "../layouts/FullLayout";
 
@@ -11,11 +11,17 @@ import FullLayout from "../layouts/FullLayout";
  * @return {JSX.Element} The rendered component based on authentication status.
  */
 const PrivateRoute = ({ children, fullLayout }) => {
+  const navigate = useNavigate();
   let authenticated;
   let login = localStorage.getItem("userData");
   if (login) {
     authenticated = JSON.parse(login);
   }
+  console.log(window.location.pathname === "/login")
+  if (authenticated && window.location.pathname === "/login") {
+     navigate("/dashboard");
+  }
+  console.log(authenticated)
   //
   return authenticated ? (
     fullLayout ? (

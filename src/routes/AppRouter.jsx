@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import Error from "../components/Error";
 import Login from "../components/Authentication/Login"
-import Dashboard from "../components/common/Dashboard"
 import SignUp from "../components/Authentication/SignUp"
 import ChangePassword from "../components/Authentication/ChangePassword"
 import PrivateRoute from "./PrivateRoute";

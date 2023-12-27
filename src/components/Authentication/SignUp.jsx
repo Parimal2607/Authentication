@@ -8,13 +8,12 @@ import {
   Label,
   Row,
 } from "reactstrap";
-import AuthImage from "../../assets/images/authImage.svg";
 import { Formik, Form } from "formik";
-import { RegisterSchema } from "../schema";
 import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { SHA256 } from "crypto-js";
+import { RegisterSchema } from "../../constant/schema";
 const initialValues = {
   fname: "",
   lname: "",

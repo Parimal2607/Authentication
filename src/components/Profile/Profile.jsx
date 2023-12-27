@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Col, Input, Label, Row } from "reactstrap";
 import { Formik, Form } from "formik";
-import { RegisterSchema, UpdateProfileSchema } from "../schema";
+import { UpdateProfileSchema } from "../../constant/schema";
 import toast from "react-hot-toast";
 
 /**
@@ -28,7 +28,6 @@ const Profile = () => {
    * @param {object} values - The values from the form submission.
    */
   const onSubmit = (values) => {
-    console.log("values");
     const allUsers = JSON.parse(localStorage.getItem("dataKey"));
     const loggedInUser = allUsers?.find(
       (user) => user.email === userName.email
@@ -46,6 +45,15 @@ const Profile = () => {
     } else {
       toast.error("not updated there is some issue");
     }
+  };
+
+   /**
+   * Resets the form values to their initial state when "Cancel" button is clicked.
+   *
+   * @param {object} formikProps - Formik form props.
+   */
+   const handleCancel = (formikProps) => {
+    formikProps.resetForm({ values: initialValues });
   };
 
   return (
@@ -135,7 +143,7 @@ const Profile = () => {
                         <Button type="submit" className="primary-btn">
                           Save
                         </Button>
-                        <Button className="secondary-btn">Cancel</Button>
+                        <Button className="secondary-btn"  onClick={() => handleCancel({ resetForm })}>Cancel</Button>
                       </div>
                     </Form>
                   )}

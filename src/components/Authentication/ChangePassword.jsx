@@ -8,9 +8,8 @@ import {
   Label,
   Row,
 } from "reactstrap";
-import AuthImage from "../../assets/images/authImage.svg";
 import { Formik, Form } from "formik";
-import { UpdatePasswordSchema } from "../schema";
+import { UpdatePasswordSchema } from "../../constant/schema";
 import toast from "react-hot-toast";
 import { Icon } from "@iconify/react";
 import { SHA256 } from 'crypto-js';
@@ -87,6 +86,7 @@ const ChangePassword = () => {
       localStorage.setItem('dataKey', JSON.stringify(allUsers));
 
       toast.success('Password updated successfully!');
+      localStorage.removeItem("userData");
       navigate("/login")
       resetForm();
     } else {

@@ -11,9 +11,9 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Formik, Form } from "formik";
-import { LoginSchema } from "../schema";
 import { Icon } from "@iconify/react";
 import { SHA256 } from "crypto-js";
+import { LoginSchema } from "../../constant/schema";
 const initialValues = {
   loginEmail: "",
   loginPassword: "",

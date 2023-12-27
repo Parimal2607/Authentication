@@ -13,18 +13,27 @@ const Product = () => {
   const url = "https://dummyjson.com/products";
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [total, setTotal] = useState(0)
 
-/**
- * Fetches info from the specified URL using axios.
- *
- * @param {string} url - The URL to fetch data from.
- * @return {Promise<void>} - A promise that resolves when the data is fetched successfully.
- */
+
+  let limit = 8;
+  const offset = currentPage  * limit;
+  /**
+   * Fetches info from the specified URL using axios.
+   *
+   * @param {string} url - The URL to fetch data from.
+   * @return {Promise<void>} - A promise that resolves when the data is fetched successfully.
+   */
   const fetchInfo = async () => {
+
     try {
-      const response = await axios.get(url);
-      setData(response.data.products);
+      const response = await axios.get(
+        `${url}?skip=${offset}&limit=${limit}`
+      );
       setLoading(false);
+      setData(response.data.products);
+      setTotal(response.data.total)
     } catch (error) {
       console.error("Error fetching data:", error);
       setLoading(false);
@@ -32,10 +41,16 @@ const Product = () => {
   };
 
   useEffect(() => {
-    fetchInfo();
-  }, []);
+    fetchInfo(currentPage);
+  }, [currentPage]);
+
+
+  const handlePageClick = (page) => {
+    setCurrentPage(page.selected) ;
+  };
+
   return (
-    <GlobalInfo.Provider value={{ data }}>
+    <GlobalInfo.Provider value={{ data, handlePageClick, total,  limit}}>
       <div className="container mt-3">
         {loading ? (
           <Loader />
