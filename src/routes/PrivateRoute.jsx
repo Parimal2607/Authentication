@@ -1,4 +1,3 @@
-import React from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import AdminLayout from "../layouts/AdminLayout";
 import FullLayout from "../layouts/FullLayout";
@@ -17,11 +16,11 @@ const PrivateRoute = ({ children, fullLayout }) => {
   if (login) {
     authenticated = JSON.parse(login);
   }
-  console.log(window.location.pathname === "/login")
+
   if (authenticated && window.location.pathname === "/login") {
-     navigate("/dashboard");
+    navigate("/dashboard");
   }
-  console.log(authenticated)
+
   //
   return authenticated ? (
     fullLayout ? (

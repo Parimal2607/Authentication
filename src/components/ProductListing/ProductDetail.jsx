@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Loader from "../common/Loader";
 import Slider from "react-slick";
@@ -36,7 +36,6 @@ const ProductDetail = () => {
     fetchProductDetail();
   }, [productDetailUrl]);
 
-  console.log(productDetail);
   const settings = {
     dots: true,
     infinite: true,
@@ -66,13 +65,12 @@ const ProductDetail = () => {
         <div className="container mt-3">
           <div className="product-detail">
             <h1 className="mb-4">Product Detail</h1>
-
             <div className="product">
               <div className="product-image">
                 <Slider {...settings}>
-                  {productDetail.images.map((img) => {
+                  {productDetail.images.map((img, id) => {
                     return (
-                      <div>
+                      <div key={id}>
                         <img
                           src={img}
                           alt={productDetail.title}

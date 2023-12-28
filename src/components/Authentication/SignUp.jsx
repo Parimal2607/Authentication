@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Button,
   Col,
@@ -13,7 +13,8 @@ import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { SHA256 } from "crypto-js";
-import { RegisterSchema } from "../../constant/schema";
+import { RegisterSchema } from "../../schema";
+import { toastMessages } from "../../constant/messages";
 const initialValues = {
   fname: "",
   lname: "",
@@ -70,10 +71,10 @@ const SignUp = () => {
     const filterArr = newArr.find((e) => values.email === e.email);
 
     if (filterArr) {
-      toast.error("Email id already exists");
+      toast.error(toastMessages.emailExist);
     } else {
       localStorage.setItem("dataKey", JSON.stringify(arr));
-      toast.success("Registered successfully");
+      toast.success(toastMessages.registerSuccess);
       navigate("/login");
     }
   };

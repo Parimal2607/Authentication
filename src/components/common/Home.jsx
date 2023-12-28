@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
 import { Container } from "reactstrap";
-import { toast } from "react-hot-toast";
 
 /**
  * Renders the Home component.

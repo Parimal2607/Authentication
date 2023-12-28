@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import Loader from "../common/Loader";
 import ProductListing from "./ProductListing";
 export const GlobalInfo = createContext();
@@ -40,14 +40,12 @@ const Product = () => {
     }
   };
 
-  useEffect(() => {
-    fetchInfo(currentPage);
-  }, [currentPage]);
-
-
   const handlePageClick = (page) => {
     setCurrentPage(page.selected) ;
   };
+  useEffect(() => {
+    fetchInfo();
+  }, [currentPage]);
 
   return (
     <GlobalInfo.Provider value={{ data, handlePageClick, total,  limit}}>

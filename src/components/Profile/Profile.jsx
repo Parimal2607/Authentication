@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Button, Col, Input, Label, Row } from "reactstrap";
 import { Formik, Form } from "formik";
-import { UpdateProfileSchema } from "../../constant/schema";
 import toast from "react-hot-toast";
+import { UpdateProfileSchema } from "../../schema";
+import { toastMessages } from "../../constant/messages";
 
 /**
  * Renders the user profile page.
@@ -22,17 +23,19 @@ const Profile = () => {
     email: userName.email,
     mobile: userName.mobile,
   };
+  const navigate = useNavigate();
   /**
    * Submits the form with the provided values and updates the user information.
    *
    * @param {object} values - The values from the form submission.
    */
   const onSubmit = (values) => {
+    
     const allUsers = JSON.parse(localStorage.getItem("dataKey"));
     const loggedInUser = allUsers?.find(
       (user) => user.email === userName.email
     );
-    console.log(loggedInUser);
+
     if (loggedInUser) {
       (loggedInUser.fname = values.fname),
         (loggedInUser.lname = values.lname),
@@ -41,19 +44,19 @@ const Profile = () => {
         localStorage.setItem("userData", JSON.stringify(loggedInUser));
       localStorage.setItem("dataKey", JSON.stringify(allUsers));
 
-      toast.success("User Info updated successfully!");
+      toast.success(toastMessages.userProfile);
     } else {
-      toast.error("not updated there is some issue");
+      toast.error(toastMessages.userProfileInvalid);
     }
   };
 
-   /**
+  /**
    * Resets the form values to their initial state when "Cancel" button is clicked.
    *
    * @param {object} formikProps - Formik form props.
    */
-   const handleCancel = (formikProps) => {
-    formikProps.resetForm({ values: initialValues });
+  const handleCancel = () => {
+    navigate("/dashboard");
   };
 
   return (
@@ -78,7 +81,7 @@ const Profile = () => {
                     handleBlur,
                   }) => (
                     <Form onSubmit={handleSubmit}>
-                      {console.log(errors)}
+                     
                       <div className="input-fields">
                         <Label>First Name</Label>
                         <Input
@@ -143,7 +146,12 @@ const Profile = () => {
                         <Button type="submit" className="primary-btn">
                           Save
                         </Button>
-                        <Button className="secondary-btn"  onClick={() => handleCancel({ resetForm })}>Cancel</Button>
+                        <Button
+                          className="secondary-btn"
+                          onClick={handleCancel}
+                        >
+                          Cancel
+                        </Button>
                       </div>
                     </Form>
                   )}

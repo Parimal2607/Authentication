@@ -1,5 +1,3 @@
-import React from "react";
-
 const CustomSvgIcon = ({ icon }) => {
   switch (icon) {
     case "Emoji":

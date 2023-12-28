@@ -7,8 +7,8 @@ import {
   LAST_NAME_MIN_CHARACTER,
   MOBILE_NUMBER_MIN_CHARACTER,
   PASSWORD_MIN_CHARACTER,
-} from "../Contant";
-import { validationMessages } from "../messages";
+} from "../constant/contant";
+import { validationMessages } from "../constant/messages";
 // Validation schema for user registration
 export const RegisterSchema = Yup.object().shape({
   fname: Yup.string()

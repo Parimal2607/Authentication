@@ -14,5 +14,15 @@ export const validationMessages = {
   mobileRequired: "Mobile number is required",
   invalidMobile: "Invalid mobile number",
   mobileValid: "Too Short! Must be at least 10 digits",
-
+};
+export const toastMessages = {
+  emailExist: "Email id already exists",
+  registerSuccess: "Registered successfully",
+  loginSuccess: "You have successfully logged in.",
+  invalidCred: "Invalid email or password",
+  passwordUpdate: "Password updated successfully!",
+  passwordValid: "Password can only contain Latin letters.",
+  currentPasswordInvalid: "Current password is incorrect",
+  userProfile: "User Info updated successfully!",
+  userProfileInvalid: "not updated there is some issue",
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Button,
   Col,
@@ -13,7 +13,8 @@ import toast from "react-hot-toast";
 import { Formik, Form } from "formik";
 import { Icon } from "@iconify/react";
 import { SHA256 } from "crypto-js";
-import { LoginSchema } from "../../constant/schema";
+import { LoginSchema } from "../../schema";
+import { toastMessages } from "../../constant/messages";
 const initialValues = {
   loginEmail: "",
   loginPassword: "",
@@ -27,11 +28,7 @@ const initialValues = {
  * @return {void}
  */
 const Login = () => {
-  const [userName, setUserName] = useState(() => {
-    const savedItem = localStorage.getItem("dataKey");
-    const parsedItem = JSON.parse(savedItem);
-    return parsedItem || "";
-  });
+
   const [show, setShow] = useState(false);
   /**
    * Toggles the visibility of an element.
@@ -45,6 +42,9 @@ const Login = () => {
   };
   const navigate = useNavigate();
   const onSubmit = (values) => {
+    const savedItem = localStorage.getItem("dataKey");
+    const userName = JSON.parse(savedItem);
+   
     const newArr = userName?.find(
       (e) =>
         values.loginEmail === e.email &&
@@ -53,10 +53,10 @@ const Login = () => {
 
     if (newArr) {
       localStorage.setItem("userData", JSON.stringify(newArr));
-      toast.success("You have successfully logged in.");
+      toast.success(toastMessages.loginSuccess);
       navigate("/dashboard");
     } else {
-      toast.error("Invalid email or password");
+      toast.error(toastMessages.invalidCred);
     }
   };
 

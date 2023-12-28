@@ -1,5 +1,3 @@
-import React from "react";
-
 const CommonCard = ({image, imgTitle, brand, category, title, price, discountPercentage, rating}) => {
   return (
     <div className="product-detail">

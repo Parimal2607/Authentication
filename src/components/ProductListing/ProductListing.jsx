@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext } from "react";
 import { Col, Row } from "reactstrap";
 import { GlobalInfo } from "./Product";
 import { Link } from "react-router-dom";

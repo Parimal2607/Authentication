@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Button,
   Col,
@@ -9,11 +9,13 @@ import {
   Row,
 } from "reactstrap";
 import { Formik, Form } from "formik";
-import { UpdatePasswordSchema } from "../../constant/schema";
 import toast from "react-hot-toast";
 import { Icon } from "@iconify/react";
 import { SHA256 } from 'crypto-js';
 import { useNavigate } from "react-router-dom";
+import { UpdatePasswordSchema } from "../../schema";
+import { toastMessages } from "../../constant/messages";
+
 
 const initialValues = {
   currentPassword: "",
@@ -26,11 +28,6 @@ const initialValues = {
  * @return {ReactNode} The rendered ChangePassword component.
  */
 const ChangePassword = () => {
-  const [userName, setUserName] = useState(() => {
-    const savedItem = localStorage.getItem("userData");
-    const parsedItem = JSON.parse(savedItem);
-    return parsedItem || "";
-  });
   const [showCurr, setShowCurr] = useState(false);
   const [showNew, setShowNew] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -73,6 +70,8 @@ const ChangePassword = () => {
    * @return {undefined} - There is no return value.
    */
   const onSubmit = (values, { resetForm }) => {
+    const savedItem = localStorage.getItem("userData");
+    const userName = JSON.parse(savedItem);
     const allUsers = JSON.parse(localStorage.getItem('dataKey'));
     const loggedInUser = allUsers?.find((user) => user.email === userName.email);
 
@@ -85,12 +84,12 @@ const ChangePassword = () => {
       localStorage.setItem('userData', JSON.stringify(loggedInUser));
       localStorage.setItem('dataKey', JSON.stringify(allUsers));
 
-      toast.success('Password updated successfully!');
+      toast.success(toastMessages.passwordUpdate);
       localStorage.removeItem("userData");
       navigate("/login")
       resetForm();
     } else {
-      toast.error('Current password is incorrect');
+      toast.error(toastMessages.currentPasswordInvalid);
     }
   };
 
