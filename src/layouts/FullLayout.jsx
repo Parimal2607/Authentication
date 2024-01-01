@@ -1,5 +1,3 @@
-import React from "react";
-
 const FullLayout = ({ children }) => {
   return (
     <section className="mid-section full">

@@ -14,11 +14,10 @@ const Product = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
-  const [total, setTotal] = useState(0)
-
+  const [total, setTotal] = useState(0);
 
   let limit = 8;
-  const offset = currentPage  * limit;
+  const offset = currentPage * limit;
   /**
    * Fetches info from the specified URL using axios.
    *
@@ -26,14 +25,11 @@ const Product = () => {
    * @return {Promise<void>} - A promise that resolves when the data is fetched successfully.
    */
   const fetchInfo = async () => {
-
     try {
-      const response = await axios.get(
-        `${url}?skip=${offset}&limit=${limit}`
-      );
+      const response = await axios.get(`${url}?skip=${offset}&limit=${limit}`);
       setLoading(false);
       setData(response.data.products);
-      setTotal(response.data.total)
+      setTotal(response.data.total);
     } catch (error) {
       console.error("Error fetching data:", error);
       setLoading(false);
@@ -41,14 +37,14 @@ const Product = () => {
   };
 
   const handlePageClick = (page) => {
-    setCurrentPage(page.selected) ;
+    setCurrentPage(page.selected);
   };
   useEffect(() => {
     fetchInfo();
   }, [currentPage]);
 
   return (
-    <GlobalInfo.Provider value={{ data, handlePageClick, total,  limit}}>
+    <GlobalInfo.Provider value={{ data, handlePageClick, total, limit }}>
       <div className="container mt-3">
         {loading ? (
           <Loader />

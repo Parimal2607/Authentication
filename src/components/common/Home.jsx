@@ -14,11 +14,14 @@ function Home() {
 
   return (
     <>
-     
       <Container fluid="lg">
         <div className="text-center">
           <h2 className="title mb-3">
-            Hi <span>{authenticated.fname} { authenticated.lname}</span> ,
+            Hi{" "}
+            <span>
+              {authenticated.fname} {authenticated.lname}
+            </span>{" "}
+            ,
           </h2>
           <h3 className="mb-0 title">Welcome to your project.</h3>
         </div>

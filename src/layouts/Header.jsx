@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Navbar,
   Collapse,
@@ -9,12 +9,10 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  NavLink,
 } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { IoClose } from "react-icons/io5";
 import CustomSvgIcon from "../components/common/CustomSvgIcon";
-
 
 /**
  * Renders the Dashboard component.
@@ -47,45 +45,41 @@ export const Dashboard = () => {
           <div className="navbar-brand">
             <h3 className="mb-0">
               <Link className="nav-link" to="/dashboard">
-                <CustomSvgIcon icon="Emoji"/>
+                <CustomSvgIcon icon="Emoji" />
               </Link>
             </h3>
-          </div> 
-          <div className="d-flex gap-3 align-items-center">
-          <UncontrolledDropdown
-                className="d-md-none d-inline-block"
-                inNavbar
-                nav
-              >
-                <DropdownToggle caret nav>
-                  <div className="avatar-data">
-                    <div className="one">
-                      {authenticated.fname.charAt(0)}
-                    </div>
-                  </div>
-                </DropdownToggle>
-                <DropdownMenu end>
-                  <DropdownItem tag={Link} to="/profile">
-                    Profile
-                  </DropdownItem>
-                  <DropdownItem onClick={() => logOut()}>Logout</DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
-          <button
-            className="navbar-toggler"
-            type="button"
-            onClick={() => setSidebarVisible(!sidebarVisible)}
-          >
-            <div>
-              <span className="one"></span>
-              <span className="two"></span>
-              <span className="three"></span>
-            </div>
-          </button>
           </div>
-         
-         
-         
+          <div className="d-flex gap-3 align-items-center">
+            <UncontrolledDropdown
+              className="d-md-none d-inline-block"
+              inNavbar
+              nav
+            >
+              <DropdownToggle caret nav>
+                <div className="avatar-data">
+                  <div className="one">{authenticated.fname.charAt(0)}</div>
+                </div>
+              </DropdownToggle>
+              <DropdownMenu end>
+                <DropdownItem tag={Link} to="/profile">
+                  Profile
+                </DropdownItem>
+                <DropdownItem onClick={() => logOut()}>Logout</DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+            <button
+              className="navbar-toggler"
+              type="button"
+              onClick={() => setSidebarVisible(!sidebarVisible)}
+            >
+              <div>
+                <span className="one"></span>
+                <span className="two"></span>
+                <span className="three"></span>
+              </div>
+            </button>
+          </div>
+
           <Collapse navbar className={sidebarVisible ? "active" : ""}>
             <Nav className="ms-auto" navbar>
               <NavItem className="d-inline d-md-none sideheader-li">
@@ -109,12 +103,12 @@ export const Dashboard = () => {
                   Product
                 </Link>
               </NavItem>
-              <NavItem >
+              <NavItem>
                 <Link className="nav-link nav-hover" to="/contact">
                   Contact
                 </Link>
               </NavItem>
-              <NavItem >
+              <NavItem>
                 <Link className="nav-link nav-hover" to="/about">
                   About
                 </Link>
@@ -126,9 +120,7 @@ export const Dashboard = () => {
               >
                 <DropdownToggle caret nav>
                   <div className="avatar-data">
-                    <div className="one">
-                      {authenticated.fname.charAt(0)}
-                    </div>
+                    <div className="one">{authenticated.fname.charAt(0)}</div>
                     <div className="two">{authenticated.fname}</div>
                   </div>
                 </DropdownToggle>
@@ -141,7 +133,6 @@ export const Dashboard = () => {
               </UncontrolledDropdown>
             </Nav>
           </Collapse>
-         
         </Navbar>
       </header>
     </>

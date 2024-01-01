@@ -28,7 +28,6 @@ const initialValues = {
  * @return {void}
  */
 const Login = () => {
-
   const [show, setShow] = useState(false);
   /**
    * Toggles the visibility of an element.
@@ -44,7 +43,7 @@ const Login = () => {
   const onSubmit = (values) => {
     const savedItem = localStorage.getItem("dataKey");
     const userName = JSON.parse(savedItem);
-   
+
     const newArr = userName?.find(
       (e) =>
         values.loginEmail === e.email &&

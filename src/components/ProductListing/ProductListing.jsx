@@ -10,7 +10,7 @@ import CommonCard from "../common/CommonCard";
  * @return {JSX.Element} The JSX element representing the product listing.
  */
 const ProductListing = () => {
-  const { data , handlePageClick, total, limit} = useContext(GlobalInfo);
+  const { data, handlePageClick, total, limit } = useContext(GlobalInfo);
   return (
     <>
       <Row className="gy-4 my-3 match-height">

@@ -1,4 +1,3 @@
-import React from "react";
 import { Col, Container, Row } from "reactstrap";
 import {
   FaFacebookF,
@@ -25,8 +24,9 @@ function Footer() {
           <Row className="align-items-center justify-content-center">
             <Col xl={7} md={8} sm={12}>
               <p className="mb-0">
-                COPYRIGHT © 2022 <a className="link-text">{authenticated.fname}</a>, All
-                rights Reserved
+                COPYRIGHT © 2022{" "}
+                <a className="link-text">{authenticated.fname}</a>, All rights
+                Reserved
               </p>
             </Col>
             <Col xl={5} md={4} sm={12}>

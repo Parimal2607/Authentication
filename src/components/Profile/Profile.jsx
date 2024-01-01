@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Col, Input, Label, Row } from "reactstrap";
 import { Formik, Form } from "formik";
@@ -12,16 +11,14 @@ import { toastMessages } from "../../constant/messages";
  * @return {JSX.Element} The user profile page component.
  */
 const Profile = () => {
-  const [userName, setUserName] = useState(() => {
-    const savedItem = localStorage.getItem("userData");
-    const parsedItem = JSON.parse(savedItem);
-    return parsedItem || "";
-  });
+  const savedItem = localStorage.getItem("userData");
+  const parsedItem = JSON.parse(savedItem);
+
   const initialValues = {
-    fname: userName.fname,
-    lname: userName.lname,
-    email: userName.email,
-    mobile: userName.mobile,
+    fname: parsedItem.fname,
+    lname: parsedItem.lname,
+    email: parsedItem.email,
+    mobile: parsedItem.mobile,
   };
   const navigate = useNavigate();
   /**
@@ -30,10 +27,9 @@ const Profile = () => {
    * @param {object} values - The values from the form submission.
    */
   const onSubmit = (values) => {
-    
     const allUsers = JSON.parse(localStorage.getItem("dataKey"));
     const loggedInUser = allUsers?.find(
-      (user) => user.email === userName.email
+      (user) => user.email === parsedItem.email
     );
 
     if (loggedInUser) {
@@ -65,7 +61,7 @@ const Profile = () => {
         <Col lg="6" className="auth-sub-page">
           <div>
             <div className="right-side-detail">
-              <h1>Welcome {userName.username}</h1>
+              <h1>Welcome {parsedItem.username}</h1>
               <div className="registration-form">
                 <Formik
                   initialValues={initialValues}
@@ -81,7 +77,6 @@ const Profile = () => {
                     handleBlur,
                   }) => (
                     <Form onSubmit={handleSubmit}>
-                     
                       <div className="input-fields">
                         <Label>First Name</Label>
                         <Input

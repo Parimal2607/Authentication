@@ -1,4 +1,13 @@
-const CommonCard = ({image, imgTitle, brand, category, title, price, discountPercentage, rating}) => {
+const CommonCard = ({
+  image,
+  imgTitle,
+  brand,
+  category,
+  title,
+  price,
+  discountPercentage,
+  rating,
+}) => {
   return (
     <div className="product-detail">
       <div className="product">

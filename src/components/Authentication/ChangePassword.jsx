@@ -11,11 +11,10 @@ import {
 import { Formik, Form } from "formik";
 import toast from "react-hot-toast";
 import { Icon } from "@iconify/react";
-import { SHA256 } from 'crypto-js';
+import { SHA256 } from "crypto-js";
 import { useNavigate } from "react-router-dom";
 import { UpdatePasswordSchema } from "../../schema";
 import { toastMessages } from "../../constant/messages";
-
 
 const initialValues = {
   currentPassword: "",
@@ -32,22 +31,22 @@ const ChangePassword = () => {
   const [showNew, setShowNew] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const navigate = useNavigate();
-/**
- * A function that handles the event for showing the current value.
- *
- * @param {Event} e - The event object.
- * @return {boolean} The updated value of showCurr.
- */
+  /**
+   * A function that handles the event for showing the current value.
+   *
+   * @param {Event} e - The event object.
+   * @return {boolean} The updated value of showCurr.
+   */
   const handleShowCurr = (e) => {
     e.preventDefault();
     setShowCurr((pre) => !pre);
   };
-/**
- * Handles the event when the "Show New" button is clicked.
- *
- * @param {Event} e - The click event object.
- * @return {void} This function does not return a value.
- */
+  /**
+   * Handles the event when the "Show New" button is clicked.
+   *
+   * @param {Event} e - The click event object.
+   * @return {void} This function does not return a value.
+   */
   const handleShowNew = (e) => {
     e.preventDefault();
     setShowNew((pre) => !pre);
@@ -56,7 +55,7 @@ const ChangePassword = () => {
    * Handles the event when the confirm button is shown.
    *
    * @param {Object} e - The event object.
-   * @return {void} 
+   * @return {void}
    */
   const handleShowConfirm = (e) => {
     e.preventDefault();
@@ -72,8 +71,10 @@ const ChangePassword = () => {
   const onSubmit = (values, { resetForm }) => {
     const savedItem = localStorage.getItem("userData");
     const userName = JSON.parse(savedItem);
-    const allUsers = JSON.parse(localStorage.getItem('dataKey'));
-    const loggedInUser = allUsers?.find((user) => user.email === userName.email);
+    const allUsers = JSON.parse(localStorage.getItem("dataKey"));
+    const loggedInUser = allUsers?.find(
+      (user) => user.email === userName.email
+    );
 
     // Hash the current password for comparison
     const hashedCurrentPassword = SHA256(values.currentPassword).toString();
@@ -81,12 +82,12 @@ const ChangePassword = () => {
     if (loggedInUser && loggedInUser.password === hashedCurrentPassword) {
       // Update the password in local storage for the "userData" key
       loggedInUser.password = SHA256(values.newPassword).toString();
-      localStorage.setItem('userData', JSON.stringify(loggedInUser));
-      localStorage.setItem('dataKey', JSON.stringify(allUsers));
+      localStorage.setItem("userData", JSON.stringify(loggedInUser));
+      localStorage.setItem("dataKey", JSON.stringify(allUsers));
 
       toast.success(toastMessages.passwordUpdate);
       localStorage.removeItem("userData");
-      navigate("/login")
+      navigate("/login");
       resetForm();
     } else {
       toast.error(toastMessages.currentPasswordInvalid);
